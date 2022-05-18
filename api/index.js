@@ -18,6 +18,8 @@ const connect = async () => {
   }
 };
 
+app.use(express.json());
+
 // middleware
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
