@@ -5,7 +5,6 @@ const Featured = () => {
   const { data, loding, error } = useFetch(
     "/hotels/countByCity?cities=berlin,madrid,london"
   );
-  // console.log(data);
 
   return (
     <div className="featured">
