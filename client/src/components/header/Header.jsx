@@ -1,4 +1,3 @@
-import "./header.css";
 import {
   faBed,
   faCalendarDays,
@@ -8,6 +7,7 @@ import {
   faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./header.css";
 import { DateRange } from "react-date-range";
 import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
@@ -18,16 +18,8 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
-  const navigate = useNavigate();
-  const [openDate, setOpenDate] = useState(false);
   const [destination, setDestination] = useState("");
-  const [openOptions, setOpenOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
-
+  const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -35,6 +27,15 @@ const Header = ({ type }) => {
       key: "selection",
     },
   ]);
+  const [openOptions, setOpenOptions] = useState(false);
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
+
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -46,17 +47,9 @@ const Header = ({ type }) => {
   };
 
   const { dispatch } = useContext(SearchContext);
-  const { user } = useContext(AuthContext);
 
   const handleSearch = () => {
-    dispatch({
-      type: "NEW_SEARCH",
-      payload: {
-        destination,
-        dates,
-        options,
-      },
-    });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
 
@@ -68,7 +61,7 @@ const Header = ({ type }) => {
         }
       >
         <div className="headerList">
-          <div className="headerListItem active ">
+          <div className="headerListItem active">
             <FontAwesomeIcon icon={faBed} />
             <span>Stays</span>
           </div>
@@ -95,11 +88,10 @@ const Header = ({ type }) => {
               A lifetime of discounts? It's Genius.
             </h1>
             <p className="headerDesc">
-              Get rewarded for your travels . unlock instant saving of 10% or
-              lhfalfkjafh fkjafhkjaf sfhkasfh sfhk adsfhk fs hksdfffff fa
-              fssssfk. with a free account.
+              Get rewarded for your travels – unlock instant savings of 10% or
+              more with a free Lamabooking account
             </p>
-            {!user && <button className="headerBtn">SignIn / Register</button>}
+            {!user && <button className="headerBtn">Sign in / Register</button>}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
@@ -111,7 +103,7 @@ const Header = ({ type }) => {
                 />
               </div>
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faCalendarDays} />
+                <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
@@ -131,11 +123,11 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faPerson} />
+                <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
-                >{`${options.adult} adult . ${options.children} children . ${options.room} room `}</span>
+                >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
                 {openOptions && (
                   <div className="options">
                     <div className="optionItem">
@@ -160,7 +152,7 @@ const Header = ({ type }) => {
                       </div>
                     </div>
                     <div className="optionItem">
-                      <span className="optionText">children</span>
+                      <span className="optionText">Children</span>
                       <div className="optionCounter">
                         <button
                           disabled={options.children <= 0}
@@ -205,7 +197,7 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button onClick={handleSearch} className="headerBtn">
+                <button className="headerBtn" onClick={handleSearch}>
                   Search
                 </button>
               </div>
