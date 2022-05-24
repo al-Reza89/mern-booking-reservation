@@ -5,7 +5,10 @@ const Home = () => {
   return (
     <div className="home">
       <Sidebar />
-      <div className="homeContainer">Container</div>
+      <div className="homeContainer">
+        <Navbar />
+        Home Container
+      </div>
     </div>
   );
 };
