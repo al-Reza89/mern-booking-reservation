@@ -11,11 +11,15 @@ const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const { data, loading, error } = useFetch(`/${path}`);
+  const [list, setList] = useState();
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/${path}/${id}`);
       data.filter((item) => item._id !== id);
+      setList(data);
+      // console.log(list);
+      // console.log("data", data);
       window.location.reload();
     } catch (err) {}
   };

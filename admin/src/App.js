@@ -7,7 +7,7 @@ import Single from "./pages/single/Single";
 import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-import { userColumns } from "./datatablesource";
+import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -34,7 +34,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route path="users">
               <Route
                 index
@@ -56,18 +55,17 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    {" "}
-                    <New inputs={userInputs} title="Add new User" />{" "}
+                    <New inputs={userInputs} title="Add New User" />
                   </ProtectedRoute>
                 }
               />
             </Route>
-            <Route path="products">
+            <Route path="hotels">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={hotelColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -81,12 +79,29 @@ function App() {
               />
               <Route
                 path="new"
+                element={<ProtectedRoute>{/* <NewHotel  /> */}</ProtectedRoute>}
+              />
+            </Route>
+            <Route path="rooms">
+              <Route
+                index
                 element={
                   <ProtectedRoute>
-                    {" "}
-                    <New inputs={productInputs} title="Add new Product" />{" "}
+                    <List columns={roomColumns} />
                   </ProtectedRoute>
                 }
+              />
+              <Route
+                path=":productId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={<ProtectedRoute>{/* <NewRoom  /> */}</ProtectedRoute>}
               />
             </Route>
           </Route>
