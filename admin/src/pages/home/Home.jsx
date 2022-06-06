@@ -23,6 +23,7 @@ const Home = () => {
         </div>
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
+          {/* its comming from table folder */}
           <List />
         </div>
       </div>
