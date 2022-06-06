@@ -36,7 +36,7 @@
           display: flex;
           flex-wrap: wrap; // if item doesnt fit it will go down
           gap: 60px;
-          justify-content: space-between;
+          justify-content: space-around;
           .formInput {
             width: 40%;
 
