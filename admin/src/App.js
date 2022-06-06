@@ -7,6 +7,7 @@ import Single from "./pages/single/Single";
 import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { userColumns } from "./datatablesource";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -39,7 +40,7 @@ function App() {
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={userColumns} />
                   </ProtectedRoute>
                 }
               />
