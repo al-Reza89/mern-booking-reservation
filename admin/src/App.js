@@ -8,6 +8,8 @@ import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
+import NewHotel from "./pages/newHotel/NewHotel";
+import NewRoom from "./pages/newRoom/NewRoom";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -79,7 +81,11 @@ function App() {
               />
               <Route
                 path="new"
-                element={<ProtectedRoute>{/* <NewHotel  /> */}</ProtectedRoute>}
+                element={
+                  <ProtectedRoute>
+                    <NewHotel />
+                  </ProtectedRoute>
+                }
               />
             </Route>
             <Route path="rooms">
@@ -101,7 +107,12 @@ function App() {
               />
               <Route
                 path="new"
-                element={<ProtectedRoute>{/* <NewRoom  /> */}</ProtectedRoute>}
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <NewRoom />{" "}
+                  </ProtectedRoute>
+                }
               />
             </Route>
           </Route>
